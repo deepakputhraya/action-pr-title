@@ -1,0 +1,26 @@
+name: 'Pull Request title rules'
+description: 'Github action to enforce Pull Request title conventions'
+author: 'deepakputhraya'
+inputs:
+  regex:
+    description: 'Regex to validate the pull request title'
+    default: '.+'
+  allowed_prefixes:
+    description: 'Comma separated list of prefix allowed to be used in title. eg: feature,hotfix,JIRA-'
+    default: ''
+  prefix_case_sensitive:
+    description: 'Are the allowed prefixes case sensitive?'
+    default: false
+  min_length:
+    description: 'Min length of title'
+    default: 1
+  max_length:
+    description: 'Max length of title. -1 to ignore the rule'
+    default: -1
+
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'alert-triangle'
+  color: 'gray-dark'
