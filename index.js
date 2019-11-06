@@ -20,7 +20,7 @@ async function run() {
             return;
         }
 
-        const title = github.context.payload.title;
+        const title = github.context.payload.pull_request.title;
         core.info(`Pull Request title: "${title}"`);
         // Check if title pass regex
         const regex = RegExp(core.getInput('regex'));
