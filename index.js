@@ -20,7 +20,21 @@ async function run() {
             return;
         }
 
-        const title = github.context.payload.pull_request.title;
+        const owner = contextPullRequest.base.user.login;
+        const repo = contextPullRequest.base.repo.name;
+
+        // The pull request info on the context isn't up to date. When
+        // the user updates the title and re-runs the workflow, it would
+        // be outdated. Therefore fetch the pull request via the REST API
+        // to ensure we use the current title.
+        const {data: pullRequest} = await client.pulls.get({
+          owner,
+          repo,
+          pull_number: contextPullRequest.number
+        });
+        
+        const title = pullRequest.title;
+        
         core.info(`Pull Request title: "${title}"`);
         // Check if title pass regex
         const regex = RegExp(core.getInput('regex'));
