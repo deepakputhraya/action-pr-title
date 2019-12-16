@@ -20,8 +20,8 @@ async function run() {
             return;
         }
 
-        const owner = contextPullRequest.base.user.login;
-        const repo = contextPullRequest.base.repo.name;
+        const owner = github.context.payload.pull_request.base.user.login;
+        const repo = github.context.payload.pull_request.base.repo.name;
 
         // The pull request info on the context isn't up to date. When
         // the user updates the title and re-runs the workflow, it would
@@ -30,7 +30,7 @@ async function run() {
         const {data: pullRequest} = await client.pulls.get({
           owner,
           repo,
-          pull_number: contextPullRequest.number
+          pull_number: github.context.payload.pull_request.number
         });
         
         const title = pullRequest.title;
