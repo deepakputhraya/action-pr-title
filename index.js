@@ -6,7 +6,7 @@ const validEvent = ['pull_request'];
 function validateTitlePrefix(title, prefix, caseSensitive) {
     if (!caseSensitive) {
         prefix = prefix.toLowerCase();
-        title = prefix.toLowerCase();
+        title = title.toLowerCase();
     }
     core.info(`Checking: ${title} starts with ${prefix} - ${title.startsWith(prefix)}`);
     return title.startsWith(prefix);
