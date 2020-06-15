@@ -8,7 +8,7 @@ function validateTitlePrefix(title, prefix, caseSensitive) {
         prefix = prefix.toLowerCase();
         title = prefix.toLowerCase();
     }
-    core.info(`Checking: ${title} starts with ${prefix} - ${title.startsWith(prefix)`);
+    core.info(`Checking: ${title} starts with ${prefix} - ${title.startsWith(prefix)}`);
     return title.startsWith(prefix);
 }
 
