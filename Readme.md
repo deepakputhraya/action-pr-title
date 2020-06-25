@@ -10,8 +10,6 @@ See [action.yml](./action.yml)
 ```yaml
 steps:
 - uses: deepakputhraya/action-pr-title@master
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     regex: '([a-z])+\/([a-z])+' # Regex the title should match.
     allowed_prefixes: 'feature,stable,fix' # title should start with the given prefix
