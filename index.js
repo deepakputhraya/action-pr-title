@@ -13,7 +13,7 @@ function validateTitlePrefix(title, prefix, caseSensitive) {
 
 async function run() {
     try {
-        const authToken = core.getInput('token', {required: true})
+        const authToken = core.getInput('github_token', {required: true})
         const eventName = github.context.eventName;
         core.info(`Event name: ${eventName}`);
         if (validEvent.indexOf(eventName) < 0) {
@@ -34,7 +34,7 @@ async function run() {
           repo,
           pull_number: github.context.payload.pull_request.number
         });
-        
+
         const title = pullRequest.title;
         
         core.info(`Pull Request title: "${title}"`);
