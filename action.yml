@@ -4,19 +4,28 @@ author: 'deepakputhraya'
 inputs:
   regex:
     description: 'Regex to validate the pull request title'
+    required: false
     default: '.+'
   allowed_prefixes:
     description: 'Comma separated list of prefix allowed to be used in title. eg: feature,hotfix,JIRA-'
+    required: false
+    default: ''
+  disallowed_prefixes:
+    description: 'Comma separated list of prefix disallowed to be used in title. eg: feat,fix'
+    required: false
     default: ''
   prefix_case_sensitive:
-    description: 'Are the allowed prefixes case sensitive?'
-    default: false
+    description: 'Are the allowed & disallowed prefixes case sensitive?'
+    required: false
+    default: 'false'
   min_length:
     description: 'Min length of title'
-    default: 1
+    required: false
+    default: '1'
   max_length:
     description: 'Max length of title. -1 to ignore the rule'
-    default: -1
+    required: false
+    default: '-1'
 
 runs:
   using: 'node12'

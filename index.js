@@ -22,9 +22,9 @@ async function run() {
 
         const title = github.context.payload.pull_request.title;
         core.info(`Pull Request title: "${title}"`);
+
         // Check if title pass regex
         const regex = RegExp(core.getInput('regex'));
-        core.info(`Regex: ${regex}`);
         if (!regex.test(title)) {
             core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`);
             return
@@ -44,12 +44,20 @@ async function run() {
             return
         }
 
-        // Check if title starts with a prefix
-        const prefixes = core.getInput('allowed_prefixes');
+        // Check if title starts with an allowed prefix
+        let prefixes = core.getInput('allowed_prefixes');
         const prefixCaseSensitive = (core.getInput('prefix_case_sensitive') === 'true');
         core.info(`Allowed Prefixes: ${prefixes}`);
         if (prefixes.length > 0 && !prefixes.split(',').some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))) {
             core.setFailed(`Pull Request title "${title}" did not match any of the prefixes - ${prefixes}`);
+            return
+        }
+
+        // Check if title starts with an allowed prefix
+        prefixes = core.getInput('disallowed_prefixes');
+        core.info(`Disallowed Prefixes: ${prefixes}`);
+        if (prefixes.length > 0 && prefixes.split(',').some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))) {
+            core.setFailed(`Pull Request title "${title}" matched with a disallowed prefix - ${prefixes}`);
             return
         }
 
