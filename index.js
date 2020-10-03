@@ -53,7 +53,7 @@ async function run() {
             return
         }
 
-        // Check if title starts with an allowed prefix
+        // Check if title starts with a disallowed prefix
         prefixes = core.getInput('disallowed_prefixes');
         core.info(`Disallowed Prefixes: ${prefixes}`);
         if (prefixes.length > 0 && prefixes.split(',').some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))) {
