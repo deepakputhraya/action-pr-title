@@ -26,15 +26,6 @@ inputs:
     description: 'Max length of title. -1 to ignore the rule'
     required: false
     default: '-1'
-  github_token:
-    description: >
-      Personal access token (PAT) used to fetch the repository. The PAT is configured
-      with the local git config, which enables your scripts to run authenticated git
-      commands. The post-job step removes the PAT.
-      We recommend using a service account with the least permissions necessary.
-      Also when generating a new PAT, select the least scopes necessary.
-    required: false
-    default: ${{ github.token }}
 
 runs:
   using: 'node12'

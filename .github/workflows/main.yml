@@ -18,5 +18,3 @@ jobs:
       - run: npm install
       - name: Validate
         uses: ./
-        with:
-          github_token: ${{ github.token }}
