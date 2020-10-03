@@ -14,5 +14,4 @@ jobs:
         with:
           node-version: '10.x'      # This step prints an output (time) from the previous step's action.
       - run: npm install
-      - name: Validate
-        run: node index.js
+      - uses: deepakputhraya/action-pr-title@mforutan/master
