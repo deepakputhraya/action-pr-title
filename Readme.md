@@ -27,7 +27,7 @@ it [here](https://docs.github.com/en/free-pro-team@latest/actions/reference/even
 ```yaml
 on:
   pull_request:
-    types: [opened, edited, reopened]
+    types: [opened, edited, synchronize, reopened]
 ```
 
 Triggering the action on anything other than `pull_request` will cause a failure.

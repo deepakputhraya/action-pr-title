@@ -2,7 +2,7 @@ name: main
 # This workflow is triggered on pushes to the repository.
 on:
   pull_request:
-    types: [opened, edited, reopened]
+    types: [opened, edited, synchronize, reopened]
 
 jobs:
   build:
