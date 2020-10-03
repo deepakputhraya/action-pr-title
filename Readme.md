@@ -30,5 +30,7 @@ on:
     types: [opened, edited, reopened]
 ```
 
+Triggering the action on anything other than `pull_request` will cause a failure.
+
 ## License
 The scripts and documentation in this project are released under the [MIT License](./LICENSE)
