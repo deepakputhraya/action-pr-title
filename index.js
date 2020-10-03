@@ -13,7 +13,6 @@ function validateTitlePrefix(title, prefix, caseSensitive) {
 
 async function run() {
     try {
-        const authToken = core.getInput('github_token', {required: true})
         const eventName = github.context.eventName;
         core.info(`Event name: ${eventName}`);
         if (validEvent.indexOf(eventName) < 0) {
