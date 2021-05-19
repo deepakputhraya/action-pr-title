@@ -1,4 +1,4 @@
-name: 'Pull Request title rules'
+name: 'Blumilk Pull Request title rules'
 description: 'Github action to enforce Pull Request title conventions'
 author: 'deepakputhraya'
 inputs:
