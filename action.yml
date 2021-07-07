@@ -5,7 +5,7 @@ inputs:
   regex:
     description: 'Regex to validate the pull request title'
     required: false
-    default: '^(#\d+ )?- \w+'
+    default: '^(#\d+ )?- .+'
   allowed_prefixes:
     description: 'Comma separated list of prefix allowed to be used in title. eg: feature,hotfix,JIRA-'
     required: false

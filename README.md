@@ -11,7 +11,7 @@ See [action.yml](./action.yml)
 steps:
 - uses: deepakputhraya/action-pr-title@master
   with:
-    regex: '^(#\d+ )?- \w+' # Regex the title should match. By default, expects title to start with issue number, like: "#23 - title" or a dash, like: "- title"
+    regex: '^(#\d+ )?- .+' # Regex the title should match. By default, expects title to start with issue number, like: "#23 - title" or a dash, like: "- title"
     allowed_prefixes: 'feature,fix,JIRA' # title should start with the given prefix, empty by default
     disallowed_prefixes: 'feat/,hotfix' # title should not start with the given prefix, empty by default
     prefix_case_sensitive: false # title prefix are case insensitive. Default: false
