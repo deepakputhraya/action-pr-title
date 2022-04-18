@@ -36,13 +36,20 @@ async function run() {
         });
 
         const title = pullRequest.title;
-        
+
+        // Compose detailed error message
+        const title_example = core.getInput('title_example')
+        let title_example_message = 'Please update the title according to the rules.'
+        if (title_example) {
+            title_example_message = `The example title is: "${title_example}"`
+        }
+
         core.info(`Pull Request title: "${title}"`);
 
         // Check if title pass regex
         const regex = RegExp(core.getInput('regex'));
         if (!regex.test(title)) {
-            core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`);
+            core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}. ${title_example_message}`);
             return
         }
 

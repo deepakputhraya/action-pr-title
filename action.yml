@@ -26,6 +26,10 @@ inputs:
     description: 'Max length of title. -1 to ignore the rule'
     required: false
     default: '-1'
+  title_example:
+    description: 'An example of the PR title that will be displayed if the regex match fails'
+    required: false
+    default: ''
   github_token:
     description: >
       Personal access token (PAT) used to fetch the repository. The PAT is configured
