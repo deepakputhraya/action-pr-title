@@ -13,6 +13,7 @@ function validateTitlePrefix(title, prefix, caseSensitive) {
 
 async function run() {
     try {
+        const verbalDescription = core.getInput('verbal_description')
         const authToken = core.getInput('github_token', {required: true})
         const eventName = github.context.eventName;
         core.info(`Event name: ${eventName}`);
@@ -36,13 +37,15 @@ async function run() {
         });
 
         const title = pullRequest.title;
-        
+
         core.info(`Pull Request title: "${title}"`);
 
         // Check if title pass regex
         const regex = RegExp(core.getInput('regex'));
         if (!regex.test(title)) {
-            core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`);
+            const messageSuffix = verbalDescription ? `rule - ${verbalDescription}` : `match regex - ${regex}`;
+
+            core.setFailed(`Pull Request title "${title}" failed to pass ${messageSuffix}`);
             return
         }
 
