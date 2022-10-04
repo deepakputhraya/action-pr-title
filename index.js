@@ -41,8 +41,10 @@ async function run() {
 
         // Check if title pass regex
         const regex = RegExp(core.getInput('regex'));
+        const format = core.getInput('format')
         if (!regex.test(title)) {
             core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`);
+            core.setFailed(`Format of PR title should match: "${format}"`)
             return
         }
 
