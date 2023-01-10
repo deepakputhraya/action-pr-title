@@ -32,5 +32,22 @@ on:
 
 Triggering the action on anything other than `pull_request` will cause a failure.
 
+## Permissions
+
+In case the action fails with the following error:
+
+```
+Event name: pull_request
+Error: Resource not accessible by integration
+```
+
+You can fix this, by adding the following to your workflow:
+
+
+```yaml
+permissions:
+  pull-requests: read
+```
+
 ## License
 The scripts and documentation in this project are released under the [MIT License](./LICENSE)
