@@ -29,8 +29,15 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 ```
+or 
+[here](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#pull_request_target). 
+```yaml
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+```
 
-Triggering the action on anything other than `pull_request` will cause a failure.
+Triggering the action on anything other than `pull_request` or `pull_request_target` will cause a failure.
 
 ## License
 The scripts and documentation in this project are released under the [MIT License](./LICENSE)
