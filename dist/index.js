@@ -7807,27 +7807,44 @@ function validateLength(pullRequest, core2) {
   }
 }
 
+// src/lib/get-pull-request-title.ts
+async function getPullRequestTitle(core2, github2) {
+  const authToken = core2.getInput("github-token", { required: true });
+  if (github2.context.payload.pull_request != null) {
+    const owner = github2.context.payload.pull_request.base.user.login;
+    const repo = github2.context.payload.pull_request.base.repo.name;
+    const client = github2.getOctokit(authToken);
+    const { data: pullRequest } = await client.rest.pulls.get({
+      owner,
+      repo,
+      pull_number: github2.context.payload.pull_request.number
+    });
+    return pullRequest;
+  } else {
+    core2.setFailed("Could not determine title of pull request");
+  }
+}
+
+// src/lib/is-valid-pull-request-event.ts
+function isValidPullRequestEvent(core2, github2) {
+  if (github2.context.eventName !== "pull_request") {
+    core2.info(`Not supported event: ${github2.context.eventName}`);
+    return false;
+  }
+  return true;
+}
+
 // src/index.ts
 async function run() {
   try {
-    const authToken = import_core.default.getInput("github-token", { required: true });
-    if (import_github.default.context.eventName !== "pull_request") {
-      import_core.default.info(`Not supported event: ${import_github.default.context.eventName}`);
-      return;
-    }
-    if (import_github.default.context.payload.pull_request != null) {
-      const owner = import_github.default.context.payload.pull_request.base.user.login;
-      const repo = import_github.default.context.payload.pull_request.base.repo.name;
-      const client = import_github.default.getOctokit(authToken);
-      const { data: pullRequest } = await client.rest.pulls.get({
-        owner,
-        repo,
-        pull_number: import_github.default.context.payload.pull_request.number
-      });
-      import_core.default.info(`Checking pull-request title: "${pullRequest.title}"`);
-      validateRegex(pullRequest, import_core.default);
-      validatePrefixes(pullRequest, import_core.default);
-      validateLength(pullRequest, import_core.default);
+    if (isValidPullRequestEvent(import_core.default, import_github.default)) {
+      const pullRequest = await getPullRequestTitle(import_core.default, import_github.default);
+      if (pullRequest != null) {
+        import_core.default.info(`Checking pull-request title: "${pullRequest.title}"`);
+        validateRegex(pullRequest, import_core.default);
+        validatePrefixes(pullRequest, import_core.default);
+        validateLength(pullRequest, import_core.default);
+      }
     }
   } catch (error) {
     import_core.default.setFailed(error.message);
