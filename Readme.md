@@ -7,6 +7,7 @@ Github action to enforce Pull Request title conventions
 See [action.yml](./action.yml)
 
 ```yaml
+name: pull request title check
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
