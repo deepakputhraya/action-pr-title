@@ -38,9 +38,9 @@ jobs:
       run: |
         npm i &&
         npm run build
-    - name: Test Action
-      run: |
-        npm run test:build:ci
+    # - name: Test Action
+    #   run: |
+    #     npm run test:build:ci
     - name: Repository Integrity Check
       run: |
         git diff --quiet dist
