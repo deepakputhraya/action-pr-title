@@ -1,4 +1,4 @@
-# Github action to enforce Pull Request title conventions
+# @fastify/action-pr-title
 
 Github action to enforce Pull Request title conventions
 
