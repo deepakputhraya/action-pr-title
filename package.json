@@ -16,8 +16,8 @@
   "author": "deepakputhraya",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "1.6.0",
-    "@actions/github": "5.0.0"
+    "@actions/core": "1.10.0",
+    "@actions/github": "5.1.1"
   },
   "devDependencies": {
     "esbuild": "0.18.11",
