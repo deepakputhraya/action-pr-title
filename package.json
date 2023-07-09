@@ -16,11 +16,11 @@
   "author": "deepakputhraya",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0",
-    "@actions/github": "^5.0.0"
+    "@actions/core": "1.6.0",
+    "@actions/github": "5.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.18.11",
-    "standard": "^17.1.0"
+    "esbuild": "0.18.11",
+    "standard": "17.1.0"
   }
 }
