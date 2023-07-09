@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          npm ci
+          npm i
       - run: |
           npm run lint
 
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          npm ci
+          npm i
       - run: |
           npm run test
 
@@ -36,10 +36,8 @@ jobs:
         node-version: '16'
     - name: Build action
       run: |
-        npm ci &&
-        npm run build &&
-        rm -rf ./node_modules &&
-        npm ci --production
+        npm i &&
+        npm run build
     - name: Test Action
       run: |
         npm run test:build:ci
