@@ -7762,65 +7762,75 @@ var require_github = __commonJS({
   }
 });
 
-// src/index.js
-var core = require_core();
-var github = require_github();
-var validEvent = ["pull_request"];
-function validateTitlePrefix(title, prefix, caseSensitive) {
-  if (!caseSensitive) {
-    prefix = prefix.toLowerCase();
-    title = title.toLowerCase();
+// src/index.ts
+var import_core = __toESM(require_core());
+var import_github = __toESM(require_github());
+
+// src/lib/validate-regex.ts
+function validateRegex(pullRequest, core2) {
+  const regexString = core2.getInput("regex");
+  if (regexString === "") {
+    return;
   }
-  return title.startsWith(prefix);
+  const slashPos = regexString.lastIndexOf("/");
+  const regex = RegExp(regexString.slice(1, slashPos), regexString.slice(slashPos + 1));
+  if (!regex.test(pullRequest.title)) {
+    core2.setFailed(`Pull Request title "${pullRequest.title}" failed to pass match regex - /${regex.source}/${regex.flags}`);
+  }
 }
+
+// src/lib/validate-prefixes.ts
+function validatePrefixes(pullRequest, core2) {
+  const prefixes = core2.getInput("prefixes");
+  if (prefixes === "") {
+    return;
+  }
+  if (prefixes.split(",").findIndex((prefix) => pullRequest.title.startsWith(prefix)) === -1) {
+    core2.setFailed(`Pull Request title "${pullRequest.title}" did not matched with a prefix - "${prefixes}"`);
+  }
+}
+
+// src/lib/validate-length.ts
+function validateLength(pullRequest, core2) {
+  const minLength = parseInt(core2.getInput("min-length"), 10);
+  const maxLength = parseInt(core2.getInput("max-length"), 10);
+  if (!Number.isNaN(minLength) && minLength !== -1) {
+    if (pullRequest.title.length < minLength) {
+      core2.setFailed(`Pull Request title "${pullRequest.title}" is smaller than the minimum length specified - ${minLength}`);
+      return;
+    }
+  }
+  if (!Number.isNaN(maxLength) && maxLength !== -1) {
+    if (pullRequest.title.length > maxLength) {
+      core2.setFailed(`Pull Request title "${pullRequest.title}" is smaller than the maximum length specified - ${maxLength}`);
+    }
+  }
+}
+
+// src/index.ts
 async function run() {
   try {
-    const authToken = core.getInput("github_token", { required: true });
-    const eventName = github.context.eventName;
-    core.info(`Event name: ${eventName}`);
-    if (validEvent.indexOf(eventName) < 0) {
-      core.setFailed(`Invalid event: ${eventName}`);
+    const authToken = import_core.default.getInput("github-token", { required: true });
+    if (import_github.default.context.eventName !== "pull_request") {
+      import_core.default.info(`Not supported event: ${import_github.default.context.eventName}`);
       return;
     }
-    const owner = github.context.payload.pull_request.base.user.login;
-    const repo = github.context.payload.pull_request.base.repo.name;
-    const client = github.getOctokit(authToken);
-    const { data: pullRequest } = await client.rest.pulls.get({
-      owner,
-      repo,
-      pull_number: github.context.payload.pull_request.number
-    });
-    const title = pullRequest.title;
-    core.info(`Pull Request title: "${title}"`);
-    const regex = RegExp(core.getInput("regex"));
-    if (!regex.test(title)) {
-      core.setFailed(`Pull Request title "${title}" failed to pass match regex - ${regex}`);
-      return;
-    }
-    const minLen = parseInt(core.getInput("min_length"));
-    if (title.length < minLen) {
-      core.setFailed(`Pull Request title "${title}" is smaller than min length specified - ${minLen}`);
-      return;
-    }
-    const maxLen = parseInt(core.getInput("max_length"));
-    if (maxLen > 0 && title.length > maxLen) {
-      core.setFailed(`Pull Request title "${title}" is greater than max length specified - ${maxLen}`);
-      return;
-    }
-    let prefixes = core.getInput("allowed_prefixes");
-    const prefixCaseSensitive = core.getInput("prefix_case_sensitive") === "true";
-    core.info(`Allowed Prefixes: ${prefixes}`);
-    if (prefixes.length > 0 && !prefixes.split(",").some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))) {
-      core.setFailed(`Pull Request title "${title}" did not match any of the prefixes - ${prefixes}`);
-      return;
-    }
-    prefixes = core.getInput("disallowed_prefixes");
-    core.info(`Disallowed Prefixes: ${prefixes}`);
-    if (prefixes.length > 0 && prefixes.split(",").some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))) {
-      core.setFailed(`Pull Request title "${title}" matched with a disallowed prefix - ${prefixes}`);
+    if (import_github.default.context.payload.pull_request != null) {
+      const owner = import_github.default.context.payload.pull_request.base.user.login;
+      const repo = import_github.default.context.payload.pull_request.base.repo.name;
+      const client = import_github.default.getOctokit(authToken);
+      const { data: pullRequest } = await client.rest.pulls.get({
+        owner,
+        repo,
+        pull_number: import_github.default.context.payload.pull_request.number
+      });
+      import_core.default.info(`Checking pull-request title: "${pullRequest.title}"`);
+      validateRegex(pullRequest, import_core.default);
+      validatePrefixes(pullRequest, import_core.default);
+      validateLength(pullRequest, import_core.default);
     }
   } catch (error) {
-    core.setFailed(error.message);
+    import_core.default.setFailed(error.message);
   }
 }
 run();
