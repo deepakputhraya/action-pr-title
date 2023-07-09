@@ -1,7 +1,7 @@
 'use strict'
 
-import core from '@actions/core'
-import github from '@actions/github'
+import * as core from '@actions/core'
+import * as github from '@actions/github'
 import { validateRegex } from './lib/validate-regex'
 import { validatePrefixes } from './lib/validate-prefixes'
 import { validateLength } from './lib/validate-length'
