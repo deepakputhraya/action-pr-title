@@ -38,7 +38,7 @@ inputs:
 
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
 branding:
   icon: 'alert-triangle'
   color: 'gray-dark'
