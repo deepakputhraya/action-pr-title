@@ -1,7 +1,7 @@
 {
-  "name": "action-pr-title",
-  "version": "1.2.0",
-  "description": "Github action to enforce naming convention on Pull Request titles",
+  "name": "@fastify/action-pr-title",
+  "version": "1.0.0",
+  "description": "Github action to enforce Pull Request title conventions",
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild --bundle --platform=node --target=node16 --outfile=dist/index.js src/index.ts",
@@ -14,7 +14,7 @@
     "github",
     "actions"
   ],
-  "author": "deepakputhraya",
+  "author": "uzlopak",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "1.10.0",

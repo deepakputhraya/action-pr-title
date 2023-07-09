@@ -1,38 +1,31 @@
 name: 'Pull Request title rules'
 description: 'Github action to enforce Pull Request title conventions'
-author: 'deepakputhraya'
+author: 'uzlopak'
 inputs:
   regex:
     description: 'Regex to validate the pull request title'
     required: false
-    default: '.+'
-  allowed_prefixes:
-    description: 'Comma separated list of prefix allowed to be used in title. eg: feature,hotfix,JIRA-'
+    default: ''
+  prefixes:
+    description: 'Comma separated list of prefixes allowed to be used in title. eg: feature,chore,fix'
     required: false
     default: ''
-  disallowed_prefixes:
-    description: 'Comma separated list of prefix disallowed to be used in title. eg: feat,fix'
-    required: false
-    default: ''
-  prefix_case_sensitive:
-    description: 'Are the allowed & disallowed prefixes case sensitive?'
-    required: false
-    default: 'false'
-  min_length:
+  min-length:
     description: 'Min length of title'
     required: false
     default: '1'
-  max_length:
+  max-length:
     description: 'Max length of title. -1 to ignore the rule'
     required: false
     default: '-1'
-  github_token:
+  github-token:
     description: >
-      Personal access token (PAT) used to fetch the repository. The PAT is configured
+      Optional personal access token (PAT) used to fetch the repository. The PAT is configured
       with the local git config, which enables your scripts to run authenticated git
       commands. The post-job step removes the PAT.
       We recommend using a service account with the least permissions necessary.
       Also when generating a new PAT, select the least scopes necessary.
+      Default is GITHUB_TOKEN
     required: false
     default: ${{ github.token }}
 
@@ -40,5 +33,5 @@ runs:
   using: 'node18'
   main: 'dist/index.js'
 branding:
-  icon: 'alert-triangle'
+  icon: 'git-pull-request'
   color: 'gray-dark'
