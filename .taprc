@@ -1,0 +1,3 @@
+ts: true
+files:
+  - test/**/*.test.ts

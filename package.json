@@ -4,10 +4,11 @@
   "description": "Github action to enforce naming convention on Pull Request titles",
   "main": "dist/index.js",
   "scripts": {
-    "build": "esbuild --bundle --platform=node --target=node16 --outfile=dist/index.js src/index.js",
+    "build": "esbuild --bundle --platform=node --target=node16 --outfile=dist/index.js src/index.ts",
     "start": "node dist/index.js",
-    "lint": "standard",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "lint": "ts-standard",
+    "lint:fix": "ts-standard --fix",
+    "test": "tap"
   },
   "keywords": [
     "github",
@@ -20,7 +21,12 @@
     "@actions/github": "5.1.1"
   },
   "devDependencies": {
+    "@tsconfig/node18": "^18.2.0",
+    "@types/tap": "^15.0.8",
     "esbuild": "0.18.11",
-    "standard": "17.1.0"
+    "tap": "^16.3.7",
+    "ts-node": "^10.9.1",
+    "ts-standard": "^12.0.2",
+    "typescript": "^5.1.6"
   }
 }
