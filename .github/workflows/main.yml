@@ -11,10 +11,8 @@ jobs:
     # This job runs on Linux
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'      # This step prints an output (time) from the previous step's action.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
       - run: npm install
       - name: Validate
         uses: ./
