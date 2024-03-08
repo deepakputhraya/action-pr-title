@@ -3,7 +3,7 @@
 
 Github action to enforce Pull Request title conventions
 
-Note: This repo is a fork from https://github.com/deepakputhraya/action-pr-title/ which doesn't seem maintain.
+_**Note:** This repo is a fork from https://github.com/deepakputhraya/action-pr-title/ which doesn't seem maintain._
 
 ## Usage
 
@@ -11,7 +11,7 @@ See [action.yml](./action.yml)
 
 ```yaml
 steps:
-- uses: iress/action-pr-title@master
+- uses: iress/action-pr-title@main
   with:
     regex: '([a-z])+\/([a-z])+' # Regex the title should match.
     allowed_prefixes: 'feature,fix,JIRA' # title should start with the given prefix
