@@ -1,7 +1,9 @@
 # Branch naming rules
-<img alt="GitHub Actions status" src="https://github.com/deepakputhraya/action-pr-title/workflows/main/badge.svg">
+<img alt="GitHub Actions status" src="https://github.com/iress/action-pr-title/workflows/main/badge.svg">
 
 Github action to enforce Pull Request title conventions
+
+Note: This repo is a fork from https://github.com/deepakputhraya/action-pr-title/ which doesn't seem maintain.
 
 ## Usage
 
@@ -9,7 +11,7 @@ See [action.yml](./action.yml)
 
 ```yaml
 steps:
-- uses: deepakputhraya/action-pr-title@master
+- uses: iress/action-pr-title@master
   with:
     regex: '([a-z])+\/([a-z])+' # Regex the title should match.
     allowed_prefixes: 'feature,fix,JIRA' # title should start with the given prefix
