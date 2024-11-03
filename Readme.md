@@ -28,9 +28,9 @@ jobs:
 ```
 
 ### Note:
-Ensure to add `types` to the Pull requests webhook event as by default workflows are triggered only 
-for `opened`, `synchronize`, or `reopened` pull request events. Read more about 
-it [here](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request). 
+Ensure to add `types` to the Pull requests webhook event as by default workflows are triggered only
+for `opened`, `synchronize`, or `reopened` pull request events. Read more about
+it [here](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request).
 
 ```yaml
 ```
