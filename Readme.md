@@ -17,6 +17,7 @@ steps:
     prefix_case_sensitive: false # title prefix are case insensitive
     min_length: 5 # Min length of the title
     max_length: 20 # Max length of the title
+    verbal_description: 'Two words with a slash (/) between' # Verbal description of the regex rule
     github_token: ${{ github.token }} # Default: ${{ github.token }}
 ```
 
