@@ -41,7 +41,7 @@ inputs:
     default: ${{ github.token }}
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'index.js'
 branding:
   icon: 'alert-triangle'
